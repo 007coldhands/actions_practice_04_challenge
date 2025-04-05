@@ -1,0 +1,28 @@
+name: Python Cicd Pipeline
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Setup Python
+        uses: actions/setup-python@v5.5.0
+      - name: Run code
+        run: |
+          python hello.py
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - uses: actions/upload-artifact@v4.6.2
+        with:
+          name: hello
+          path: .
+          
+        
+    
